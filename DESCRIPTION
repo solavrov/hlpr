@@ -1,0 +1,11 @@
+Package: hlpr
+Type: Package
+Title: General Helper
+Version: 0.2.0
+Author: Stas Lavrov
+Maintainer: Stas Lavrov <2slavrov@gmail.com>
+Description: Just a general helper. Set of useful functions
+License: FREE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
