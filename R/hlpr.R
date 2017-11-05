@@ -324,7 +324,7 @@ checkLens <- function(...) {
 #'
 #' @return Value with index i
 #' @export
-e <- function(a, i) {
+getByIndex <- function(a, i) {
 
   len <- length(a)
 
@@ -336,5 +336,6 @@ e <- function(a, i) {
   return (b)
 
 }
+
 
 
