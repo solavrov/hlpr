@@ -317,7 +317,7 @@ checkLens <- function(...) {
 }
 
 
-#' Return element #i of atom, vector or list assuming that atom is infinite vector of same value
+#' Return element "i" of "a" assuming that "a" has infinite tail filled with its last element
 #'
 #' @param a Any atom, vector, list
 #' @param i Index of value
@@ -326,14 +326,12 @@ checkLens <- function(...) {
 #' @export
 e <- function(a, i) {
 
-  b <- NA
+  len <- length(a)
 
-  if (length(a) == 1)
-    b <- a
-  else if (i <= length(a))
+  if (i <= len)
     b <- a[[i]]
   else
-    cat("ERROR! Out of range\n")
+    b <- a[[len]]
 
   return (b)
 
