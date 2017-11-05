@@ -298,35 +298,45 @@ matrixSwitch <- function(expression, ...) {
 }
 
 
-#' Stretch elementary argument to reach length of others
+#' Check that all params have length = 1 or same length > 1
 #'
-#' @param a Argument to stretch
-#' @param ... Other arguments
+#' @param ... Any number of atoms, vectors, lists
 #'
-#' @return Stretched argument with rep(argument, length of others)
+#' @return Maximum length of params
 #' @export
-#'
-#' @examples
-#' x <- 1
-#' y <- c("a", "b")
-#' z <- "c"
-#' x <- stretch(x, y, z)
-#' y <- stretch(y, x, z)
-#' z <- stretch(z, y, x)
-#'
-stretch <- function(a, ...) {
+checkLens <- function(...) {
 
-  params <- append(list(...), a)
+  lens <- lengths(list(...))
+  maxLen <- max(lens)
 
-  lens <- lengths(params)
+  if (!all(lens == 1 | lens == maxLen))
+    stop("ERROR! Vector length mismatch\n")
 
-  if (all(lens == 1 | lens == max(lens))) {
-    if (length(a) == 1) a <- rep(a, max(lens))
-  } else {
-    stop("Vector length mismatch")
-  }
-
-  return (a)
+  return (maxLen)
 
 }
+
+
+#' Return element #i of atom, vector or list assuming that atom is infinite vector of same value
+#'
+#' @param a Any atom, vector, list
+#' @param i Index of value
+#'
+#' @return Value with index i
+#' @export
+e <- function(a, i) {
+
+  b <- NA
+
+  if (length(a) == 1)
+    b <- a
+  else if (i <= length(a))
+    b <- a[[i]]
+  else
+    cat("ERROR! Out of range\n")
+
+  return (b)
+
+}
+
 
