@@ -304,7 +304,7 @@ matrixSwitch <- function(expression, ...) {
 #'
 #' @return Maximum length of params
 #' @export
-checkLens <- function(...) {
+checkParams <- function(...) {
 
   lens <- lengths(list(...))
   maxLen <- max(lens)
