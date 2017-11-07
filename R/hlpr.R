@@ -324,14 +324,22 @@ checkParams <- function(...) {
 #'
 #' @return Value with index i
 #' @export
-getByIndex <- function(a, i) {
+getByIndex <- function(a, i, atoms = c("atom")) {
 
-  len <- length(a)
+  if (any(class(a) == atoms)) {
 
-  if (i <= len)
-    b <- a[[i]]
-  else
-    b <- a[[len]]
+    b <- a
+
+  } else {
+
+    len <- length(a)
+
+    if (i <= len)
+      b <- a[[i]]
+    else
+      b <- a[[len]]
+
+  }
 
   return (b)
 
