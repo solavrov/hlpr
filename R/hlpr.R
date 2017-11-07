@@ -321,6 +321,7 @@ checkParams <- function(...) {
 #'
 #' @param a Any atom, vector, list
 #' @param i Index of value
+#' @param atoms Vector of class names that cannot be break apart by index referencing
 #'
 #' @return Value with index i
 #' @export
