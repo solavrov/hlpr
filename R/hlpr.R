@@ -298,15 +298,39 @@ matrixSwitch <- function(expression, ...) {
 }
 
 
+#' Return vector of lengths of list elements
+#'
+#' @param l List
+#' @param atoms Vector of class names that length is assumed to be 1
+#'
+#' @return Vector of lengths
+#' @export
+getLengths <- function(l, atoms = c("atom")) {
+
+  lens <- numeric()
+
+  for (i in 1:length(l)) {
+    if (any(class(l[[i]]) == atoms)) {
+      lens[i] <- 1
+    } else {
+      lens[i] <- length(l[[i]])
+    }
+  }
+
+  return (lens)
+
+}
+
+
 #' Check that all params have length = 1 or same length > 1
 #'
 #' @param ... Any number of atoms, vectors, lists
 #'
 #' @return Maximum length of params
 #' @export
-checkParams <- function(...) {
+checkParams <- function(..., atoms = c("atom")) {
 
-  lens <- lengths(list(...))
+  lens <- getLengths(list(...), atoms)
   maxLen <- max(lens)
 
   if (!all(lens == 1 | lens == maxLen))
