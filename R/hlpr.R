@@ -329,7 +329,7 @@ getLengths <- function(l, atoms = c("atom")) {
 #'
 #' @return Maximum length of params
 #' @export
-checkParams <- function(..., atoms = c("atom")) {
+getLength <- function(..., atoms = c("atom")) {
 
   lens <- getLengths(list(...), atoms)
   maxLen <- max(lens)
@@ -346,7 +346,7 @@ checkParams <- function(..., atoms = c("atom")) {
 #'
 #' @param a Any atom, vector, list
 #' @param i Index of value
-#' @param atoms Vector of class names that cannot be break apart by index referencing
+#' @param atoms Vector of class names that cannot be broken apart by index referencing
 #'
 #' @return Value with index i
 #' @export
@@ -371,5 +371,45 @@ getByIndex <- function(a, i, atoms = c("atom")) {
 
 }
 
+
+#' Return attribute of object
+#'
+#' @param obj Object or list of objects
+#' @param attrName Attribute name as character
+#'
+#' @return Attribute of object
+#' @export
+getAttribute <- function(obj, attrName) {
+
+  if (is.atomic(obj)) {
+
+    a <- NA
+
+  } else {
+
+    if (class(obj) != "list") {
+
+      a <- obj[[attrName]]
+      if (is.null(a)) a <- NA
+
+    } else {
+
+      a <- list()
+      len <- length(obj)
+
+      for (i in 1:len) {
+        a[[i]] <- obj[[i]][[attrName]]
+        if (is.null(a[[i]])) a[[i]] <- NA
+      }
+
+      if (is.atomic(a[[1]])) a <- do.call("c", a)
+
+    }
+
+  }
+
+  return (a)
+
+}
 
 
