@@ -413,3 +413,37 @@ getAttribute <- function(obj, attrName) {
 }
 
 
+#' Apply function to arguments
+#'
+#' @param fun Function name
+#' @param ... Argumetns
+#' @param atoms Vector of class names that cannot be broken apart by index referencing
+#'
+#' @return Function's result
+#' @export
+applyFun <- function(fun, ..., atoms = c("atom")) {
+
+  result <- list()
+
+  len <- getLength(..., atoms = atoms)
+
+  params <- list(...)
+
+  for (i in 1:len) {
+
+    localParams <- list()
+
+    for (j in 1:length(params)) {
+      localParams[[j]] <- getByIndex(params[[j]], i, atoms)
+    }
+
+    result[[i]] <- do.call(fun, localParams)
+
+  }
+
+  if (all(mapply(is.atomic, result))) result <- mapply(c, result)
+
+  return (result)
+
+}
+
